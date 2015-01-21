@@ -33,12 +33,23 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                sendCustomMessage("op1");
+                return true;
+            case R.id.action_settings2:
+                sendCustomMessage("op2");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    /** Called when the user clicks the Send button */
+    public void sendCustomMessage(String text) {
+        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, text);
+        startActivity(intent);
     }
 
     /** Called when the user clicks the Send button */
